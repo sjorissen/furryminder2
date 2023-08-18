@@ -8,5 +8,14 @@ class NewPet(Schema):
 
 class GetPet(Schema):
     name: str
-    health: str
-    # alive: bool
+    health: int
+    alive: bool
+
+
+class LogIn(Schema):
+    username: str
+    password: str
+
+
+class LogInFailure(Schema):
+    message: str

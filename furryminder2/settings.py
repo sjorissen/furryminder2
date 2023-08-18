@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-%2c$)wf!_3@cmf3n4^=meq-*x7+=khu6pv8vys5(6ofyj2w%2g
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGIN_REGEXES = [r"^https?://localhost:1234$"]
 
 
 # Application definition
@@ -37,13 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party apps
     "django_extensions",
+    "corsheaders",
+    # first party apps
     "furryminder2",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
