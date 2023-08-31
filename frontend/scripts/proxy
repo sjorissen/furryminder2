@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+podman run --network=host \
+  -v "$(dirname "$0")/Caddyfile":/etc/Caddyfile \
+  caddy caddy run --config /etc/Caddyfile

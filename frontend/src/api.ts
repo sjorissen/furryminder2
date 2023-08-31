@@ -1,10 +1,11 @@
 import urls from './urls';
+import cookie from 'js-cookie';
 
 /**
  * GET request
  * @param url make a request to this endpoint
  */
-export async function get(url: string): Promise<ReturnType<typeof fetch>> {
+export async function get(url: string) {
   return fetch(url, {
     method: 'GET',
     headers: {
@@ -18,13 +19,15 @@ export async function get(url: string): Promise<ReturnType<typeof fetch>> {
  * @param url make a request to this endpoint
  * @param payload data being submitted (ex: email/password)
  */
-export async function post(url: string, payload: any): Promise<ReturnType<typeof fetch>> {
+export async function post(url: string, payload?: any) {
   return fetch(url, {
     method: 'POST',
+    // @ts-ignore
     headers: {
       'content-type': 'application/json',
+      'X-CSRFToken': cookie.get('csrftoken'),
     },
-    body: JSON.stringify(payload),
+    body: payload && JSON.stringify(payload),
   });
 }
 
@@ -35,5 +38,5 @@ export async function post(url: string, payload: any): Promise<ReturnType<typeof
  * @param payload username (email) and password from login form
  */
 export async function login(payload: { username: string; password: string }) {
-  return post(urls.login, payload);
+  return post(urls.api.login, payload);
 }

@@ -26,7 +26,6 @@ SECRET_KEY = 'django-insecure-%2c$)wf!_3@cmf3n4^=meq-*x7+=khu6pv8vys5(6ofyj2w%2g
 DEBUG = True
 
 ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGIN_REGEXES = [r"^https?://localhost:1234$"]
 
 
 # Application definition
@@ -40,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party apps
     "django_extensions",
-    "corsheaders",
     # first party apps
     "furryminder2",
 ]
@@ -61,8 +59,7 @@ ROOT_URLCONF = 'furryminder2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

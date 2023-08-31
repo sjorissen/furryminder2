@@ -4,6 +4,7 @@ import { Button, Card, Container, CssBaseline, TextField } from '@mui/material';
 import { FormEvent } from 'react';
 import urls from '../urls';
 import { login } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 // Playing around with MUI theming
 const theme = createTheme({
@@ -33,6 +34,7 @@ const serializeForm = (target: HTMLFormElement): Record<string, string> =>
   Object.fromEntries(new FormData(target)) as Record<string, string>;
 
 export default function Login() {
+  const navigate = useNavigate();
   const onLogin = (event: FormEvent<HTMLFormElement>) => {
     // Default = GET request at current URL. We don't want that.
     event.preventDefault();
@@ -42,7 +44,7 @@ export default function Login() {
       .then(resp => {
         switch (resp.status) {
           case 200:
-            console.log('login success');
+            navigate(urls.home);
             break;
           default:
             resp.text().then(console.error);
@@ -73,6 +75,7 @@ export default function Login() {
             label="Email Address"
             name="email"
             margin="normal"
+            defaultValue="sjorissen94@gmail.com"
             required
             autoFocus
           />
@@ -82,6 +85,7 @@ export default function Login() {
             label="Password"
             name="password"
             margin="normal"
+            defaultValue="superstrongpassword123"
             required
           />
           <Button type="submit" variant="contained">

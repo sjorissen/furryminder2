@@ -7,6 +7,7 @@ from .api import api
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
-    path('login/', views.login_view),
+    path('api/login/', views.login_view),
+    path('api/logout/', views.logout_view),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

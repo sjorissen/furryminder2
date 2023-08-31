@@ -7,7 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 from furryminder2.schema import LogIn, LogInFailure
 
 
-@csrf_exempt
 def login_view(request):
     payload = LogIn(**json.loads(request.body.decode("utf-8")))
     user = authenticate(request, username=payload.username, password=payload.password)

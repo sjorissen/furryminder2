@@ -1,0 +1,17 @@
+:8080 {
+    handle /api* {
+        reverse_proxy :8000
+    }
+
+    handle /admin* {
+        reverse_proxy :8000
+    }
+
+    handle /static* {
+        reverse_proxy :8000
+    }
+
+    handle {
+        reverse_proxy :1234
+    }
+}
