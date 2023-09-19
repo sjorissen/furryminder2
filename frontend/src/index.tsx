@@ -8,6 +8,7 @@ import urls from './urls';
 import {
   AppBar,
   Button,
+  ButtonBase,
   Container,
   CssBaseline,
   Grid,
@@ -20,6 +21,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import 'nes.css/css/nes.min.css';
 import '@fontsource/press-start-2p';
+import '@fontsource/quicksand';
+import PetView from './components/PetView';
+import TaskList from './components/TaskList';
 
 const theme = createTheme({
   palette: {
@@ -43,15 +47,6 @@ const theme = createTheme({
   },
 });
 
-const petView = createTheme({
-  typography: {
-    petName: {
-      fontFamily: "'Press Start 2P'",
-      fontSize: 30,
-    },
-  },
-});
-
 function Logout() {
   const navigate = useNavigate();
   const onLogout = event => {
@@ -70,7 +65,7 @@ function Logout() {
   };
 
   return (
-    <Button variant="contained" onClick={onLogout}>
+    <Button variant="contained" color="secondary" onClick={onLogout}>
       Log Out
     </Button>
   );
@@ -80,7 +75,7 @@ function Root() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static" color="primary">
+      <AppBar position="static">
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           <Typography variant="h4" sx={{ flex: 1, textAlign: 'center' }}>
             FurryMinder
@@ -90,23 +85,12 @@ function Root() {
       </AppBar>
       <Grid container spacing={10} sx={{ px: 15, py: 5 }}>
         <Grid item xs={5}>
-          <Box sx={{ border: '1px solid black' }}>Tasks go here</Box>
+          <Box>
+            <TaskList />
+          </Box>
         </Grid>
         <Grid item xs={7}>
-          <ThemeProvider theme={petView}>
-            <Box
-              className="nes-container is-rounded"
-              sx={{
-                border: '1px solid black',
-                display: 'grid',
-                gridAutoColumns: '1fr',
-                justifyContent: 'center',
-                textAlign: 'center',
-              }}>
-              <Typography variant="petName">Pet Name</Typography>
-              <progress className="nes-progress is-primary" value="90" max="100" />
-            </Box>
-          </ThemeProvider>
+          <PetView />
         </Grid>
       </Grid>
       {/*<Outlet />*/}
