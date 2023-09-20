@@ -11,9 +11,18 @@ import {
   ListSubheader,
   Typography,
 } from '@mui/material';
-import { ArrowBack, ArrowForward, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ArrowBack, ArrowForward, ExpandLess, ExpandMore, Edit } from '@mui/icons-material';
+import EditTask from './EditTask';
 
+/**
+ * Task list component for main page. Displays a list of tasks due for the selected
+ * date. Defaults to current date, but can move forward or backwards by a day with the
+ * arrows buttons. (Later: add the ability to select a specific date.)
+ * Task can be checked off when completed. User can also add a new task or open a form
+ * to edit an existing task.
+ */
 export default function TaskList() {
+  // Handles checkboxes for each task
   const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = value => () => {
@@ -31,6 +40,7 @@ export default function TaskList() {
 
   return (
     <List>
+      {/* Displays date for tasks & arrows to move between dates */}
       <ListSubheader
         sx={{
           bgcolor: 'primary.main',
@@ -46,17 +56,14 @@ export default function TaskList() {
           <ArrowForward />
         </IconButton>
       </ListSubheader>
+      {/* Create some temp list items */}
       {[0, 1, 2, 3].map(value => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
           <ListItem
             key={value}
-            secondaryAction={
-              <IconButton edge="end" aria-label="comments">
-                X
-              </IconButton>
-            }
+            secondaryAction={<EditTask />}
             disablePadding
             sx={{ bgcolor: 'background.paper' }}>
             <ListItemButton role={undefined} onClick={handleToggle(value)} dense>

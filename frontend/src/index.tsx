@@ -24,6 +24,8 @@ import '@fontsource/press-start-2p';
 import '@fontsource/quicksand';
 import PetView from './components/PetView';
 import TaskList from './components/TaskList';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const theme = createTheme({
   palette: {
@@ -73,28 +75,30 @@ function Logout() {
 
 function Root() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar position="static">
-        <Toolbar sx={{ justifyContent: 'flex-end' }}>
-          <Typography variant="h4" sx={{ flex: 1, textAlign: 'center' }}>
-            FurryMinder
-          </Typography>
-          <Logout />
-        </Toolbar>
-      </AppBar>
-      <Grid container spacing={10} sx={{ px: 15, py: 5 }}>
-        <Grid item xs={5}>
-          <Box>
-            <TaskList />
-          </Box>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppBar position="static">
+          <Toolbar sx={{ justifyContent: 'flex-end' }}>
+            <Typography variant="h4" sx={{ flex: 1, textAlign: 'center' }}>
+              FurryMinder
+            </Typography>
+            <Logout />
+          </Toolbar>
+        </AppBar>
+        <Grid container spacing={10} sx={{ px: 15, py: 5 }}>
+          <Grid item xs={5}>
+            <Box>
+              <TaskList />
+            </Box>
+          </Grid>
+          <Grid item xs={7}>
+            <PetView />
+          </Grid>
         </Grid>
-        <Grid item xs={7}>
-          <PetView />
-        </Grid>
-      </Grid>
-      {/*<Outlet />*/}
-    </ThemeProvider>
+        {/*<Outlet />*/}
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 }
 
